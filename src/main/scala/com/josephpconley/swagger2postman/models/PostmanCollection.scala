@@ -40,6 +40,7 @@ case class PostmanRequest(
   method: String,
   data: JsArray = Json.arr(),
   dataMode: String = "params",
+  rawModeData: Option[String] = None,
   version: Int = 2,
   tests: String = "",
   currentHelper: String = "normal",

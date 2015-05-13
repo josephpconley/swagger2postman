@@ -8,6 +8,8 @@ import scala.concurrent.duration._
 import java.net.URL
 
 import play.api.libs.json._
+import scala.language.postfixOps
+import scala.util.Try
 
 object Swagger2PostmanApp
   extends Swagger2Postman
@@ -55,11 +57,28 @@ trait Swagger2Postman
           endpoint <- swaggerApi.apis
           operation <- endpoint.operations
         } yield {
+
+          val queryParams = operation.parameters filter (_.paramType == "query") match {
+            case Nil => ""
+            case list => "?" + list.map(_.name + "=").mkString("&")
+          }
+
+          val bodyOpt = operation.parameters find (_.paramType == "body") flatMap (_.defaultValue)
+          val headers: Map[String, String] =
+            if(bodyOpt.isDefined && Try(Json.parse(bodyOpt.get)).isSuccess){
+              Map("Content-Type" -> "application/json") ++ cArgs.headers
+            } else {
+              cArgs.headers
+            }
+
+
           PostmanRequest(
             id = genUUID,
-            url = cArgs.host + endpoint.path,
-            headers = cArgs.headers map (h => s"${h._1}: ${h._2}") mkString "\n",
+            url = cArgs.host + endpoint.path + queryParams,
+            headers = headers map (h => s"${h._1}: ${h._2}") mkString "\n",
             method = operation.method,
+            rawModeData = bodyOpt,
+            dataMode = bodyOpt map (_ => "raw") getOrElse "params",
             name = operation.nickname,
             description = operation.notes,
             collectionId = collectionId
