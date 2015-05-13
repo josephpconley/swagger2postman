@@ -20,7 +20,7 @@ Try out an online version at [http://app.josephpconley.com/swagger2postman](http
 
 ##Multiple environments
 
-To take advantage of multi-environment testing, simply pass a handlebars variable like `{{host}}` as the hostname.  
+To take advantage of multi-environment testing, simply pass a handlebars variable like `{{host}}` as the hostname.
 Then, create environments in Postman that define a value for the config key `host`.  Toggling these environments with your imported collection will let you seamlessly test 
 your API in different environments.
  
