@@ -16,7 +16,16 @@ object Swagger2PostmanApp
   import scala.concurrent.ExecutionContext.Implicits.global
   implicit val httpClient = new ApacheHttpClient
 
-  val cArgs = CollectionArgs(name = "backoffice", host = "http://localhost:8080", headers = Map("X-AL-API-AuthToken" -> "adminToken"))
+  if(args.length < 2){
+    throw new IllegalArgumentException("Invalid number of arguments, must be <host> <collectionName> [<key=value> ... ]")
+  }
+
+  val headerMap = args.drop(2) map { kv =>
+    val h = kv.split("=")
+    h.head -> h.last
+  } toMap
+
+  val cArgs = CollectionArgs(host = args(0), name = args(1), headers = headerMap)
   println(generate(cArgs))
 
   def execute(url: String) = Await.result(GET(new URL(url)).apply, Duration.Inf).bodyString
@@ -29,8 +38,6 @@ trait Swagger2Postman
   def execute(url: String): String
 
   def generate(cArgs: CollectionArgs): JsValue = {
-
-    println(cArgs)
 
     val docUrl = cArgs.host + "/api-docs"
     val owner = "12345"
