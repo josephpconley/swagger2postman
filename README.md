@@ -12,14 +12,21 @@ This library takes Swagger documentation served in JSON and converts it into a J
 
 ##Demo
 
-Try out a web version at [http://app.josephpconley.com/swagger2postman](http://app.josephpconley.com/swagger2postman)
+Try out an online version at [http://app.josephpconley.com/swagger2postman](http://app.josephpconley.com/swagger2postman)
  
 ##Command line
 
 `sbt run <host> <collectionName> [<key=value> ... ]`
 
-##Examples
+##Multiple environments
 
-A simple example would be to explicitly pass the 
+To take advantage of multi-environment testing, simply pass a handlebars variable like {{host}} as the hostname.  
+Then, create environments in Postman that define a value for `host`.  Toggling these environments with your imported collection will let you seamlessly test
+ your API in different environments.
+ 
+You can also take this approach for authentication.  If your API uses a header for authentication, then pass a `headerKey`=`{{headerValue}}`
+so that all endpoints get a global authentication header with an environment-sensitive value.
 
-##Blog post
+##Next Steps
+This currently supports Swagger 1.2.  There appears to be Swagger 2.0 import functionality in the current version of Postman, 
+though I haven't gotten it to work, so if there's enough demand for a Swagger 2.0 version, let me know in the issues section (or add it yourself!)
