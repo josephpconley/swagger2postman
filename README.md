@@ -16,7 +16,7 @@ Try out an online version at [http://app.josephpconley.com/swagger2postman](http
  
 ##Command line
 
-`sbt run <host> <collectionName> [<key=value> ... ]`
+`sbt run <host> <collectionName> [<headerKey=headerValue> ... ]`
 
 Prints out json and writes json file to current directory.
 
