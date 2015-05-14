@@ -18,14 +18,16 @@ Try out an online version at [http://app.josephpconley.com/swagger2postman](http
 
 `sbt run <host> <collectionName> [<key=value> ... ]`
 
+Prints out json and writes json file to current directory.
+
 ##Multiple environments
 
-To take advantage of multi-environment testing, simply pass a handlebars variable like `{{host}}` as the hostname.
-Then, create environments in Postman that define a value for the config key `host`.  Toggling these environments with your imported collection will let you seamlessly test 
-your API in different environments.
+To take advantage of multi-environment testing, I would first run swagger2postman against a hosted Swagger doc.  
+Then I do a simple Find/Replace, replacing the target host with a handlebars variable like `{{host}}`.  Then I create environments in Postman that define a value for the config key `host`.  
+Toggling these environments with your imported collection will let you seamlessly test your API in different environments.
  
-You can also take this approach for authentication.  If your API uses a header for authentication, then pass a `headerKey`=`{{headerValue}}`
-so that all endpoints get a global authentication header with an environment-sensitive value.
+You can also use environment variables for authentication.  If your API uses a header for authentication, then pass a `headerKey`=`{{headerValue}}`
+so that all endpoints get a global authentication header with an environment-dependent value.
 
 ##Next Steps
 This currently supports Swagger 1.2.  There appears to be Swagger 2.0 import functionality in the current version of Postman, 

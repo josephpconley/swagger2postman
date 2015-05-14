@@ -1,5 +1,7 @@
 package com.josephpconley.swagger2postman
 
+import java.io.PrintWriter
+
 import com.josephpconley.swagger2postman.models._
 import com.stackmob.newman._
 import com.stackmob.newman.dsl._
@@ -28,7 +30,12 @@ object Swagger2PostmanApp
   } toMap
 
   val cArgs = CollectionArgs(host = args(0), name = args(1), headers = headerMap)
-  println(generate(cArgs))
+  val postmanJson = generate(cArgs)
+
+  println(postmanJson)
+  val writer = new PrintWriter("postman.json", "UTF-8")
+  writer.append(Json.prettyPrint(postmanJson))
+  writer.close()
 
   def execute(url: String) = Await.result(GET(new URL(url)).apply, Duration.Inf).bodyString
 }
