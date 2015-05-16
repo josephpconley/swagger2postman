@@ -1,7 +1,8 @@
 package com.josephpconley.swagger2postman.models.swagger.v12
 
-import com.josephpconley.swagger2postman.{ConversionUtils, CollectionArgs}
+import com.josephpconley.swagger2postman.CollectionArgs
 import com.josephpconley.swagger2postman.models.postman._
+import com.josephpconley.swagger2postman.utils.{HttpEnabled, ConversionUtils}
 import play.api.libs.json.{Json, JsValue}
 
 import scala.util.Try
@@ -9,10 +10,8 @@ import scala.util.Try
 import ConversionUtils._
 
 trait Swagger2Postman
-  extends SwaggerFormats
-  with PostmanFormats {
-
-  def execute(url: String): String
+  extends PostmanFormats
+  with HttpEnabled {
 
   def toPostman(swaggerDoc: SwaggerDoc, cArgs: CollectionArgs): JsValue = {
 

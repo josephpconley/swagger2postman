@@ -1,5 +1,6 @@
 package com.josephpconley.swagger2postman
 
+import com.josephpconley.swagger2postman.utils.ConversionUtils
 import play.api.libs.json.Json
 
 import ConversionUtils._

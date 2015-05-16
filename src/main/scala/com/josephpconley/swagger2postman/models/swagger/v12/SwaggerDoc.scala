@@ -7,6 +7,8 @@ case class SwaggerDoc(
   swaggerVersion: String,
   apis: Seq[SwaggerApiPath])
 
+object SwaggerDoc extends SwaggerFormats
+
 case class SwaggerApiPath(
   path: String,
   description: String)
@@ -17,6 +19,8 @@ case class SwaggerApi(
   basePath: String,
   resourcePath: String,
   apis: Seq[SwaggerEndpoint])
+
+object SwaggerApi extends SwaggerFormats
 
 case class SwaggerEndpoint(
   path: String,
