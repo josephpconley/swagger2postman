@@ -11,9 +11,11 @@ import play.api.libs.json._
 import scala.concurrent._
 import scala.concurrent.duration._
 import scala.language.postfixOps
+import scala.util.Try
 
-object Swagger2PostmanV12
+object Swagger2Postman
   extends v12.Swagger2Postman
+  with v2.Swagger2Postman
   with App {
 
   import scala.concurrent.ExecutionContext.Implicits.global
@@ -30,9 +32,17 @@ object Swagger2PostmanV12
 
   val cArgs = CollectionArgs(host = args(0), name = args(1), headers = headerMap)
 
-  val res = execute(cArgs.docUrl)
-  val swaggerDoc = Json.fromJson[v12.SwaggerDoc](Json.parse(res)).get
-  val postmanJson = toPostman(swaggerDoc, cArgs)
+  val postmanJson = Try(execute(cArgs.docUrl)) map { res =>
+    val swaggerDoc = Json.fromJson[v12.SwaggerDoc](Json.parse(res)).get
+    toPostman(swaggerDoc, cArgs)
+  } getOrElse {
+    Try(execute(cArgs.host)) map { res =>
+      val swaggerDoc = Json.fromJson[v2.SwaggerDoc](Json.parse(res)).get
+      toPostman(swaggerDoc, cArgs)
+    } getOrElse {
+      throw new RuntimeException("Unable to reach Swagger 1.2 and 2.0 endpoints.")
+    }
+  }
 
   println(postmanJson)
   val writer = new PrintWriter("postman.json", "UTF-8")

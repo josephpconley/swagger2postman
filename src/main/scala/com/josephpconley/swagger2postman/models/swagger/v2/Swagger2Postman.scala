@@ -1,17 +1,14 @@
 package com.josephpconley.swagger2postman.models.swagger.v2
 
-import com.josephpconley.swagger2postman.{ConversionUtils, CollectionArgs}
+import com.josephpconley.swagger2postman.CollectionArgs
 import com.josephpconley.swagger2postman.models.postman._
+import com.josephpconley.swagger2postman.utils.ConversionUtils
 
 import play.api.libs.json.{JsValue, Json}
 
 import ConversionUtils._
 
-trait Swagger2Postman
-  extends SwaggerFormats
-  with PostmanFormats {
-
-  def execute(url: String): String
+trait Swagger2Postman extends PostmanFormats {
 
   def toPostman(swaggerDoc: SwaggerDoc, cArgs: CollectionArgs): JsValue = {
 

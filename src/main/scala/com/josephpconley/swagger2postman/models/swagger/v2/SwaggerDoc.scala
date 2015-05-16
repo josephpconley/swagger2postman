@@ -10,6 +10,14 @@ case class SwaggerDoc(
   tags: Seq[SwaggerTag],
   paths: Map[String, Map[String, SwaggerPath]])
 
+object SwaggerDoc {
+  implicit val paramFmt = Json.format[SwaggerParam]
+  implicit val pathFmt = Json.format[SwaggerPath]
+  implicit val tagFmt = Json.format[SwaggerTag]
+  implicit val infoFmt = Json.format[SwaggerInfo]
+  implicit val docFmt = Json.format[SwaggerDoc]
+}
+
 case class SwaggerInfo(
   description: String,
   version: String,
@@ -31,11 +39,3 @@ case class SwaggerParam(
   name: String,
   description: String,
   required: Boolean)
-
-trait SwaggerFormats {
-  implicit val paramFmt = Json.format[SwaggerParam]
-  implicit val pathFmt = Json.format[SwaggerPath]
-  implicit val tagFmt = Json.format[SwaggerTag]
-  implicit val infoFmt = Json.format[SwaggerInfo]
-  implicit val docFmt = Json.format[SwaggerDoc]
-}

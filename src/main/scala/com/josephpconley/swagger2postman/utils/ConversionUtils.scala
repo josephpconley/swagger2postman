@@ -1,4 +1,4 @@
-package com.josephpconley.swagger2postman
+package com.josephpconley.swagger2postman.utils
 
 object ConversionUtils {
 
