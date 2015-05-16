@@ -1,4 +1,4 @@
-package com.josephpconley.swagger2postman.models
+package com.josephpconley.swagger2postman.models.swagger.v12
 
 import play.api.libs.json.Json
 
