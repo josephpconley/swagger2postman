@@ -1,4 +1,6 @@
 # swagger2postman
+
+[![Join the chat at https://gitter.im/josephpconley/swagger2postman](https://badges.gitter.im/josephpconley/swagger2postman.svg)](https://gitter.im/josephpconley/swagger2postman?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Create a Postman collection from Swagger documentation
 
 ##Motivation
