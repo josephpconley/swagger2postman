@@ -1,8 +1,9 @@
-package com.josephpconley.swagger2postman
+package com.josephpconley.swagger2postman.app.v12
 
 import java.io.PrintWriter
 import java.net.URL
 
+import com.josephpconley.swagger2postman.CollectionArgs
 import com.josephpconley.swagger2postman.models.swagger._
 import com.stackmob.newman._
 import com.stackmob.newman.dsl._
@@ -13,12 +14,10 @@ import scala.concurrent.duration._
 import scala.language.postfixOps
 import scala.util.Try
 
-object Swagger2Postman
+object Swagger2PostmanApp
   extends v12.Swagger2Postman
   with v2.Swagger2Postman
   with App {
-
-  import scala.concurrent.ExecutionContext.Implicits.global
   implicit val httpClient = new ApacheHttpClient
 
   if(args.length < 2){
