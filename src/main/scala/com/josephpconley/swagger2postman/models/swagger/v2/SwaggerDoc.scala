@@ -18,24 +18,10 @@ object SwaggerDoc {
   implicit val docFmt = Json.format[SwaggerDoc]
 }
 
-case class SwaggerInfo(
-  description: String,
-  version: String,
-  title: String)
+case class SwaggerInfo(description: Option[String], version: String, title: String)
 
-case class SwaggerTag(
-  name: String,
-  description: String)
+case class SwaggerTag(name: String, description: Option[String])
 
-case class SwaggerPath(
-  tags: Seq[String],
-  summary: String,
-  description: String,
-  operationId: String,
-  parameters: Seq[SwaggerParam])
+case class SwaggerPath(tags: Seq[String], summary: String, description: String, operationId: String, parameters: Seq[SwaggerParam])
 
-case class SwaggerParam(
-  in: String,
-  name: String,
-  description: String,
-  required: Boolean)
+case class SwaggerParam(in: String, name: String, description: Option[String], required: Boolean)

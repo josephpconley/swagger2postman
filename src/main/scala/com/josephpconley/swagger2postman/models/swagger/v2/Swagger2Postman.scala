@@ -23,6 +23,7 @@ trait Swagger2Postman extends PostmanFormats {
           case list => "?" + list.map(_.name + "=").mkString("&")
         }
 
+        //TODO remove double slash
         operation.tags.head -> PostmanRequest(
           id = genUUID,
           url = s"http://${swaggerDoc.host}${swaggerDoc.basePath}$path$queryParams",
@@ -40,7 +41,7 @@ trait Swagger2Postman extends PostmanFormats {
       PostmanFolder(
         id = genUUID,
         name = tag.name,
-        description = tag.description,
+        description = tag.description.getOrElse(""),
         order = requests filter (_._1 == tag.name) map (_._2.id),
         collection_name = cArgs.name,
         collection_owner = cArgs.owner,
