@@ -34,3 +34,7 @@ so that all endpoints get a global authentication header with an environment-dep
 ##Next Steps
 This currently supports Swagger 1.2.  There appears to be Swagger 2.0 import functionality in the current version of Postman, 
 though I haven't gotten it to work, so if there's enough demand for a Swagger 2.0 version, let me know in the issues section (or add it yourself!)
+
+##Release Notes
+### 1.0
+- Initial support for Swagger 1.2
