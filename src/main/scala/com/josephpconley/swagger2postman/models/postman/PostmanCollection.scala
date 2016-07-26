@@ -1,4 +1,4 @@
-package com.josephpconley.swagger2postman.models
+package com.josephpconley.swagger2postman.models.postman
 
 import org.joda.time.DateTime
 import play.api.libs.json._

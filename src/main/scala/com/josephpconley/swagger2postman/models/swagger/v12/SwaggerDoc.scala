@@ -1,4 +1,4 @@
-package com.josephpconley.swagger2postman.models
+package com.josephpconley.swagger2postman.models.swagger.v12
 
 import play.api.libs.json.Json
 
@@ -6,6 +6,8 @@ case class SwaggerDoc(
   apiVersion: String,
   swaggerVersion: String,
   apis: Seq[SwaggerApiPath])
+
+object SwaggerDoc extends SwaggerFormats
 
 case class SwaggerApiPath(
   path: String,
@@ -17,6 +19,8 @@ case class SwaggerApi(
   basePath: String,
   resourcePath: String,
   apis: Seq[SwaggerEndpoint])
+
+object SwaggerApi extends SwaggerFormats
 
 case class SwaggerEndpoint(
   path: String,
