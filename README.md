@@ -29,7 +29,7 @@ Try out an online version at [http://app.josephpconley.com/swagger2postman](http
 
 Or using `curl` to convert a Swagger 2.0 document into a Postman JSON import file:
     
-    curl -X POST --data "@v2petstore-swagger.json" localhost:9000/swagger20?name=my_collection --header "Content-Type:application/json" > my_collection.json 
+    curl -X POST --data "@v2petstore-swagger.json" "http://app.josephpconley.com/swagger20?name=my_collection&header_key=header_value" --header "Content-Type:application/json" > my_collection.json 
 
 
 ##Multiple environments
