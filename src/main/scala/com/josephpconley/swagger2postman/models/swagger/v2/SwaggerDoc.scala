@@ -22,6 +22,6 @@ case class SwaggerInfo(description: Option[String], version: String, title: Stri
 
 case class SwaggerTag(name: String, description: Option[String])
 
-case class SwaggerPath(tags: Seq[String], summary: String, description: String, operationId: String, parameters: Seq[SwaggerParam])
+case class SwaggerPath(tags: Seq[String], summary: String, description: Option[String] = None, operationId: String, parameters: Option[Seq[SwaggerParam]] = None)
 
 case class SwaggerParam(in: String, name: String, description: Option[String], required: Boolean)

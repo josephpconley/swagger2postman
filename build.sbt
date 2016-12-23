@@ -2,7 +2,7 @@ name := "swagger2postman"
 
 organization := "com.josephpconley"
 
-version := "1.0"
+version := "1.1"
 
 resolvers += "Typesafe Repo" at "http://repo.typesafe.com/typesafe/releases/"
 

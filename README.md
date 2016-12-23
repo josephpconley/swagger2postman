@@ -10,17 +10,20 @@ But if you're working with an identical API across multiple environments, or you
 (like omitting a required query parameter), Swagger UI comes up a bit short.  
 
 [Postman](https://www.getpostman.com/) to the rescue!  Using Postman you can define variables for multiple environments and have more control over request generation. 
+
+##Purpose
 This library takes Swagger documentation served in JSON and converts it into a JSON collection which can be imported directly into Postman.
+You can see a full description of the Swagger JSON spec at [http://swagger.io/specification/](http://swagger.io/specification/)
 
 ##Command line
 
 To convert a Swagger 2.0 JSON file to a valid Postman collection:
 
-    sbt runMain com.josephpconley.swagger2postman.app.v2.Swagger2PostmanApp <filename> <collectionName> [<headerKey=headerValue> ... ]
+    sbt "runMain com.josephpconley.swagger2postman.app.v2.Swagger2PostmanApp <filename> <collectionName> [<headerKey=headerValue> ... ]"
 
 To convert a Swagger 1.2 hosted endpoint to a valid Postman collection:
 
-    sbt runMain com.josephpconley.swagger2postman.app.v12.Swagger2PostmanApp <host> <collectionName> [<headerKey=headerValue> ... ]
+    sbt "runMain com.josephpconley.swagger2postman.app.v12.Swagger2PostmanApp <host> <collectionName> [<headerKey=headerValue> ... ]"
 
 
 ##Demo

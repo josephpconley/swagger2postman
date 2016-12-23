@@ -35,7 +35,7 @@ object Swagger2PostmanApp
   Json.fromJson[v2.SwaggerDoc](Json.parse(fileJson)).fold(
     invalid => {
       println("Error converting Swagger v2 doc to Postman json")
-      println(JsError.toFlatJson(invalid))
+      println(Json.prettyPrint(JsError.toFlatJson(invalid)))
     },
     swaggerDoc => {
       val postmanJson = toPostman(swaggerDoc, cArgs)

@@ -13,15 +13,17 @@ trait Swagger2Postman extends PostmanFormats {
   def toPostman(swaggerDoc: SwaggerDoc, cArgs: CollectionArgs): JsValue = {
 
     val requests: Seq[(String, PostmanRequest)] =
-      (for {
+      for {
         (path, operations) <- swaggerDoc.paths.toSeq
         (method, operation) <- operations.toSeq
       } yield {
 
-        val queryParams = operation.parameters filter (_.in == "query") match {
-          case Nil => ""
-          case list => "?" + list.map(_.name + "=").mkString("&")
-        }
+        val queryParams = operation.parameters.map { params =>
+          params.filter(_.in == "query") match {
+            case Nil => ""
+            case list => "?" + list.map(_.name + "=").mkString("&")
+          }
+        }.getOrElse("")
 
         //TODO remove double slash
         operation.tags.head -> PostmanRequest(
@@ -30,12 +32,12 @@ trait Swagger2Postman extends PostmanFormats {
           headers = cArgs.headers map (h => s"${h._1}: ${h._2}") mkString "\n",
           method = method,
           rawModeData = None,
-          dataMode = "params", //bodyOpt map (_ => "raw") getOrElse "params",
+          //dataMode = bodyOpt map (_ => "raw") getOrElse "params",
           name = operation.operationId,
-          description = operation.description,
+          description = operation.summary + "\r\n" + operation.description.getOrElse(""),
           collectionId = cArgs.collectionId
         )
-      }).toSeq
+      }
 
     val folders = swaggerDoc.tags map { tag =>
       PostmanFolder(
